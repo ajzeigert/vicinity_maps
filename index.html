@@ -8,13 +8,17 @@
 <link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.6/mapbox.css' rel='stylesheet' />
 <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-minimap/v1.0.0/Control.MiniMap.js'></script>
 <link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-minimap/v1.0.0/Control.MiniMap.css' rel='stylesheet' />
+<script src='https://api.tiles.mapbox.com/mapbox.js/plugins/mapbox-directions.js/v0.1.0/mapbox.directions.js'></script>
+<link rel='stylesheet' href='https://api.tiles.mapbox.com/mapbox.js/plugins/mapbox-directions.js/v0.1.0/mapbox.directions.css' type='text/css' />
 <style>
   body { margin:0; padding:0; }
   #map { position:absolute; top:0; bottom:0; width:100%; }
+	
 </style>
 </head>
 <body>
 <div id='map'></div>
+
 <script>
 L.mapbox.accessToken = 'pk.eyJ1IjoiZ2VvYmxhaXIiLCJhIjoiSmlycEREdyJ9.bw75ofg8vGQ8JObWjW3YSQ';
 var map = L.mapbox.map('map', 'geoblair.1d2aa0b0')
@@ -23,8 +27,8 @@ var map = L.mapbox.map('map', 'geoblair.1d2aa0b0')
 			new L.Control.MiniMap(L.mapbox.tileLayer('geoblair.1d2aa0b0'), {
 				width: 250,
 				height: 250,
-				collapsedHeight: 20,
-				collapsedWidth: 20,
+				collapsedHeight: 80,
+				collapsedWidth: 80,
 				zoomLevelOffset: -5,
 				toggleDisplay: true,
 				aimingRectOptions: {color: 'black', weight: 3}
@@ -32,6 +36,15 @@ var map = L.mapbox.map('map', 'geoblair.1d2aa0b0')
 			.addTo(map);
 		});
 
+var satellite = L.mapbox.tileLayer('mapbox.streets-satellite'),
+		geobright = L.mapbox.tileLayer('geoblair.1d2aa0b0');
+	
+var baseMaps = {
+    "Satellite": satellite,
+		"GeoBright": geobright
+};
+	
+L.control.layers(baseMaps).addTo(map);
 	
 </script>
 </body>
